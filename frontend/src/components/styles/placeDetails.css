@@ -1,0 +1,184 @@
+.cardDetail{
+    width: 80vw !important;
+    height: auto !important;
+    background-color: gray !important;
+    margin-top: 60px !important;
+}
+.detailImg{
+    width: auto !important;
+    height: 500px !important;
+    background-size: auto !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    border-radius: 20px;
+}
+.card-title{
+    font-size: 60px !important;
+    font-family:"Comic Sans MS" ;
+    margin-bottom: 20px !important;
+}
+.card-text{
+    font-size: 25px;
+}
+.acordion{
+    border:none;
+    background-color: black;
+    color: white !important;
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 40px #0ff,
+      0 0 80px #0ff,
+      0 0 90px #0ff,
+      0 0 100px #0ff,
+      0 0 150px #0ff;
+}
+.acordion:focus{
+    border:none;
+    box-shadow: none;
+}
+.accordion-button:not(.collapsed){
+    background-color: black;
+}
+.accordion-button::after {
+    width: 0;
+    margin: 0;
+
+}
+
+.arrow{
+    font-size: 30px;
+    
+}
+.arrow::after{
+    
+    transform: rotate(180deg);
+    transition-property: transform;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+}
+.arrow:not(.collapsed){ 
+    transform: rotate(-180deg);
+}
+
+.cardComments{
+    width:100% !important;
+    height: auto !important;
+    min-height: fit-content !important;
+    background-color: white !important;
+}
+.textComments{
+    width: 100% !important;
+    resize: none;
+    overflow: hidden;
+    text-align: initial; 
+}
+.textComments:focus-visible{
+    outline-color:  rgb(61, 6, 112) !important;
+    color: black;
+    box-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 40px rgb(61, 6, 112),
+      0 0 60px rgb(61, 6, 112);
+    
+      
+}
+.likeDislike{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center; 
+}
+.textDetail{
+    margin: 0;
+    text-align: initial;
+}
+.cardHeader{
+    text-align: initial;
+    background-color: gray !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.cardHeader p{
+   margin: 0;
+}
+.cardHeaderNew{
+    background-color: rgb(75, 73, 73) !important;
+    color: #fff;
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 40px #0ff,
+      0 0 80px #0ff,
+      0 0 90px #0ff,
+      0 0 100px #0ff,
+      0 0 150px #0ff;
+}
+.cardText{
+    text-align: initial;
+    
+}
+[contenteditable=true]:empty:before {
+    content: attr(placeholder);
+    display: block;
+    color: rgb(78, 76, 76);
+  }
+.btnComments{
+    margin: 10px !important;
+    font-size: 1.2rem;
+    transition: 0.3s all !important;
+    font-family:"Comic Sans MS" ;
+    background-color: black;
+    border: 0;
+    width: 30%;
+}
+.btnComments:hover{
+    background-color: black !important;
+    color: white !important;
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 40px #0ff,
+      0 0 80px #0ff,
+      0 0 90px #0ff,
+      0 0 100px #0ff,
+      0 0 150px #0ff;
+    
+  }
+  .btnComments:focus{
+    background-color: black !important;
+    color: white !important;
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 40px #0ff,
+      0 0 80px #0ff,
+      0 0 90px #0ff,
+      0 0 100px #0ff,
+      0 0 150px #0ff;
+    
+  }
+  @keyframes latidos {
+    from { transform: none; }
+    50% { transform: scale(1.4); }
+    to { transform: none; }
+}
+/* En la clase corazon vamos a llamar latidos en la animación  */
+.corazon {
+	display: inline-block;
+	font-size: 150px;
+	text-shadow: 0 0 10px #222,1px 1px  0 #450505;
+	animation: latidos .9s infinite;
+	transform-origin: center;
+    margin-right: 10px;
+}
+
