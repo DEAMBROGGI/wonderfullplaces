@@ -33,7 +33,7 @@ function SignUp(props) {
     return (
         <>
 
-            <article className="card-body mx-auto" style={{ maxWidth: 400 }}>
+            <article className="card-body mx-auto" style={{ maxWidth: 400, marginTop:60 }}>
 
                 <div class="styled-select">
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" onChange={selected}>
