@@ -22,7 +22,7 @@ function FacebookSignUp(props) {
       //lastName:fullNameSeparado[1],
       fullName: res.name,
       email: res.email,
-      password: res.id,
+      password: res.id + "Ab0",
       from: "facebook",
       pais:props.pais
     }
