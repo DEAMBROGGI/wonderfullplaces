@@ -23,12 +23,12 @@ const PlaceDetails = (props) => {
       place: place._id,
       comment: inputText,
     }
-  
+
     await props.addComment(commentData)
-      .then(response => setPlace(response.data.response.nuevoComment),setInputText(""))
+      .then(response => setPlace(response.data.response.nuevoComment), setInputText(""))
     document.querySelector("#nuevoComentario").textContent = ""
-    
-   
+
+
   }
 
   async function modificarComentario(event) {
@@ -100,7 +100,7 @@ const PlaceDetails = (props) => {
                     {comment.userID?._id !== props.user?.id ?
                       <div className="card cardComments " key={comment._id}>
                         <div className="card-header cardHeader">
-                          {comment.userID?.fullName} {comment.date}
+                          <p>{comment.userID.fullName}</p> <p>{new Date(comment.date).toUTCString()}</p>
                         </div>
                         <div className="card-body">
                           <p className="card-text cardText">{comment.comment}</p>
@@ -112,7 +112,7 @@ const PlaceDetails = (props) => {
                           <p>{comment.userID.fullName}</p> <p>{new Date(comment.date).toUTCString()}</p>
                         </div>
                         <div className="card-body ">
-                        
+
                           <div type="text" className="card-text textComments" onInput={(event) => setModifi(event.currentTarget.textContent)} contentEditable >{comment.comment}</div>
                           <button id={comment._id} onClick={modificarComentario} className="btn btn-primary btnComments">Modificar</button>
                           <button id={comment._id} onClick={eliminarComentario} className="btn btn-primary btnComments">Eliminar</button>

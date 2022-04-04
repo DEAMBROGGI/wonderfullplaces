@@ -26,7 +26,7 @@ const sendEmail = async (email, uniqueString) => { //FUNCION ENCARGADA DE ENVIAR
         subject: "Verificacion de email usuario ", //EL ASUNTO Y EN HTML EL TEMPLATE PARA EL CUERPO DE EMAIL Y EL LINK DE VERIFICACION
         html: `
         <div >
-        <h1 style="color:red">Presiona <a href=http://localhost:4000/api/verify/${uniqueString}>aqui</a> para confirma tu email. Gracias </h1>
+        <h1 style="color:red">Presiona <a href=https://wonderfullplaces.herokuapp.com/api/verify/${uniqueString}>aqui</a> para confirma tu email. Gracias </h1>
         </div>
         `
     
@@ -50,11 +50,11 @@ const usersControllers = {
         const { uniqueString } = req.params; //EXTRAE EL EL STRING UNICO DEL LINK
 
         const user = await User.findOne({ uniqueString: uniqueString })
-        console.log(user) //BUSCA AL USUARIO CORRESPONDIENTE AL LINK
+        //console.log(user) //BUSCA AL USUARIO CORRESPONDIENTE AL LINK
         if (user) {
             user.emailVerificado = true //COLOCA EL CAMPO emailVerified en true
             await user.save()
-            res.redirect("http://localhost:3000/") //REDIRECCIONA AL USUARIO A UNA RUTA DEFINIDA
+            res.redirect("https://wonderfullplaces.herokuapp.com/") //REDIRECCIONA AL USUARIO A UNA RUTA DEFINIDA
             //return  res.json({success:true, response:"Su email se ha verificado correctamente"})
         }
         else { res.json({ success: false, response: "Su email no se ha verificado" }) }
@@ -62,7 +62,7 @@ const usersControllers = {
 
 
     signUpUsers:async (req,res)=>{
-        console.log(req.body)
+       
         let {fullName, email, password, from, pais } = req.body.userData
       const test = req.body.test
 
@@ -73,7 +73,7 @@ const usersControllers = {
             if (usuarioExiste) {
                 console.log(usuarioExiste.from.indexOf(from))
                 if (usuarioExiste.from.indexOf(from) !== -1) {
-                    console.log("resultado de if " +(usuarioExiste.from.indexOf(from) !==0 )) //INDEXOF = 0 EL VALOR EXISTE EN EL INDICE EQ A TRUE -1 NO EXITE EQ A FALSE
+                    //console.log("resultado de if " +(usuarioExiste.from.indexOf(from) !==0 )) //INDEXOF = 0 EL VALOR EXISTE EN EL INDICE EQ A TRUE -1 NO EXITE EQ A FALSE
                     res.json({ success: false,
                                from:"signup", 
                                message: "Ya has realizado tu SignUp de esta forma por favor realiza SignIn" })
@@ -152,10 +152,10 @@ const usersControllers = {
         try {
             const usuarioExiste = await User.findOne({ email })
             //METODO PARA BUSCAR PASSWORD MEDIANTE FROM
-            console.log(usuarioExiste.from)
-            console.log(from)
+            //console.log(usuarioExiste.from)
+            //console.log(from)
             const indexpass = usuarioExiste.from.indexOf(from)
-            console.log(usuarioExiste.password[indexpass])
+            //console.log(usuarioExiste.password[indexpass])
 
             if (!usuarioExiste) {// PRIMERO VERIFICA QUE EL USUARIO EXISTA
                 res.json({ success: false, message: "Tu usuarios no ha sido registrado realiza signUp" })
@@ -171,8 +171,11 @@ const usersControllers = {
                                         id:usuarioExiste._id,
                                         fullName: usuarioExiste.fullName,
                                         email: usuarioExiste.email,
-                                        from:from
+                                        from:from,
+                                        
                                         }
+                        usuarioExiste.isConected = true
+                        usuarioExiste.lastConection = new Date().toLocaleString()
                         await usuarioExiste.save()
 
                         const token = jwt.sign({...userData}, process.env.SECRET_KEY,{expiresIn:  60* 60*24 })
@@ -194,16 +197,21 @@ const usersControllers = {
                     if(usuarioExiste.emailVerificado){
                         
                         let contraseñaCoincide =  usuarioExiste.password.filter(pass =>bcryptjs.compareSync(password, pass))
-                        console.log(contraseñaCoincide)
-                        console.log("resultado de busqueda de contrasela: " +(contraseñaCoincide.length >0))
+                        //console.log(contraseñaCoincide)
+                        //console.log("resultado de busqueda de contrasela: " +(contraseñaCoincide.length >0))
                         if(contraseñaCoincide.length >0){
                             
                         const userData = {
                             id: usuarioExiste._id,
                             fullName: usuarioExiste.fullName, 
                             email: usuarioExiste.email,
-                            from:from
+                            from:from,
+                            
+
                             }
+                            usuarioExiste.isConected = true
+                            usuarioExiste.lastConection = new Date().toLocaleString()
+                            await usuarioExiste.save()
                             const token = jwt.sign({...userData}, process.env.SECRET_KEY, {expiresIn:  60* 60*24 })
                         res.json({ success: true, 
                             from: from, 
@@ -235,8 +243,11 @@ const usersControllers = {
        
         const email = req.body.closeuser
         const user = await User.findOne({ email })
+        
+        user.isConected = false
         await user.save()
-        res.json(console.log('sesion cerrada ' + email))
+        
+        res.json({success:true})
     },
     verificarToken:(req, res) => {
        

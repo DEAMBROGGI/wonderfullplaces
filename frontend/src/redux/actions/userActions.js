@@ -1,13 +1,13 @@
 import axios from 'axios';
+import { urlBackend } from '../../App';
 
 const userActions = {
 
     signUpUser: (userData) => {
-        console.log(userData)
+       
         return async (dispatch, getState) => {
 
-            const res = await axios.post('https://wonderfullplaces.herokuapp.com/api/auth/signUp', { userData })
-            console.log(res)
+            const res = await axios.post(`${urlBackend}/api/auth/signUp`, { userData })
             dispatch({
                 type: 'message',
                 payload: {
@@ -16,6 +16,7 @@ const userActions = {
                     success: res.data.success
                 }
             });
+            
 
         }
     },
@@ -23,11 +24,11 @@ const userActions = {
 
         return async (dispatch, getState) => {
 
-            const user = await axios.post('https://wonderfullplaces.herokuapp.com/api/auth/signIn', { logedUser })
+            const user = await axios.post(`${urlBackend}/api/auth/signIn`, { logedUser })
             if (user.data.success) {
                 localStorage.setItem('token', user.data.response.token)
                 dispatch({ type: 'user', payload: user.data.response.userData });
-
+                dispatch({type:'userList'})
             }
             dispatch({
                 type: 'message',
@@ -41,24 +42,27 @@ const userActions = {
     },
     SignOutUser: (closeuser) => {
         return async (dispatch, getState) => {
-            const user = axios.post('https://wonderfullplaces.herokuapp.com/api/auth/signOut', { closeuser })
+            const user = await axios.post(`${urlBackend}/api/auth/signOut`, { closeuser })
             localStorage.removeItem('token')
             dispatch({ type: 'user', payload: null });
+            dispatch({type:'userList'})
+            return user
         }
+        
     },
     VerificarToken: (token) => {
 
         return async (dispatch, getState) => {
 
-            await axios.get('https://wonderfullplaces.herokuapp.com/api/auth/signInToken', {
+            await axios.get(`${urlBackend}/api/auth/signInToken`, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
                 .then(user => {
-                    console.log(user)
                     if (user.data.success) {
                         dispatch({ type: 'user', payload: user.data.response });
+                        dispatch({type:'userList'})
                         dispatch({
                             type: 'message',
                             payload: {
@@ -72,7 +76,6 @@ const userActions = {
                     }
                 }
                 ).catch(error => {
-                    console.log(error.response.status)
                     if (error.response.status === 401)
                         dispatch({
                             type: 'message',

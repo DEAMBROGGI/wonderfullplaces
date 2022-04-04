@@ -20,15 +20,15 @@ export default function NavBar() {
 
     return (
         <>
-            <nav class="nav nav-pills flex-column flex-sm-row">
-                <button id="user" name="type" class="flex-sm-fill text-sm-center  active btnNav" onClick={() => setSelected("user")} >
-                    <LinkRouter to="/signin" className="btnLink">USER</LinkRouter>
-                </button>
-                <button id="places" name="type" class="flex-sm-fill text-sm-center btnNav" onClick={() => setSelected("places")}>
+            <nav className="nav nav-pills flex-column flex-sm-row">
+                
+                <button id="places" name="type" className="flex-sm-fill text-sm-center btnNav" onClick={() => setSelected("places")}>
                     <LinkRouter to="/places" className="btnLink" >Places</LinkRouter>
                 </button>
-                <div class="nav-item ml-auto userContainer">
+                <div className="nav-item ml-auto userContainer">
+               
                     <Container />
+                  
                 </div>
 
             </nav>

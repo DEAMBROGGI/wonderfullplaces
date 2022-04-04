@@ -8,6 +8,8 @@ const userSchema =  new mongoose.Schema({
     from:{type:Array},
     uniqueString:{type:String, required:true},
     emailVerificado:{type:Boolean, required:true},
+    isConected:{type:Boolean},
+    lastConection:{type:Date}
     
 })
 

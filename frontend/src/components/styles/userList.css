@@ -1,0 +1,28 @@
+.userRow{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    margin: 10px;
+    align-items: center;
+    border: 3px solid black;
+    padding: 10px;
+    background-color: grey;
+    border-radius: 10px
+
+}
+.userName{
+    font-size: 30px;
+    font-family:"Comic Sans MS";
+    margin: 10px;
+}
+.userData{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.userTime{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

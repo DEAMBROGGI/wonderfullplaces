@@ -1,0 +1,9 @@
+.containerUserAccount{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: auto;
+    top: 120px;
+    align-items: center;
+}

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { urlBackend } from '../../App';
 
 const commentsActions = {
    
@@ -8,7 +9,7 @@ const commentsActions = {
         return async (dispatch, getState) => {
 
             if (comment.comment !== "") {
-                const res = await axios.post('https://wonderfullplaces.herokuapp.com/api/places/comment', { comment }, {
+                const res = await axios.post(`${urlBackend}/api/places/comment`, { comment }, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -40,7 +41,7 @@ const commentsActions = {
 
         const token = localStorage.getItem('token')
         return async (dispatch, getState) => {
-            const res = await axios.put('https://wonderfullplaces.herokuapp.com/api/places/comment', { comment }, {
+            const res = await axios.put(`${urlBackend}/api/places/comment`, { comment }, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -61,7 +62,7 @@ const commentsActions = {
 
         const token = localStorage.getItem('token')
         return async (dispatch, getState) => {
-            const res = await axios.post(`https://wonderfullplaces.herokuapp.com/api/places/comment/${id}`, {}, {
+            const res = await axios.post(`${urlBackend}/api/places/comment/${id}`, {}, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
