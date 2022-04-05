@@ -2,20 +2,39 @@ const User = require('../models/usersModel')
 const bcryptjs = require('bcryptjs')
 const crypto = require('crypto')        //NPM CRYPTO
 const nodemailer = require('nodemailer') //NPM NODEMAILER
+const { google } = require("googleapis");
+const OAuth2 = google.auth.OAuth2;
 const jwt = require('jsonwebtoken')
+
+const myOAuth2Client = new OAuth2(
+    process.env.GOOGLE_CLIENTID,
+    process.env.GOOGLE_CLIENTSECRET,
+    "https://developers.google.com/oauthplayground"
+    )
+    myOAuth2Client.setCredentials({
+        refresh_token:process.env.GOOGLE_REFRESHTOKEN
+        });
+
+        const accessToken = myOAuth2Client.getAccessToken()     
 
 
 
 const sendEmail = async (email, uniqueString) => { //FUNCION ENCARGADA DE ENVIAR EL EMAIL
 
     const transporter = nodemailer.createTransport({ //DEFINIMOS EL TRASPORTE UTILIZANDO NODEMAILER
-        host: 'smtp.gmail.com',         //DEFINIMOS LO PARAMETROS NECESARIOS
-        port: 465,
-        secure: true,
+        service: "gmail",
         auth: {
-            user: "useremailverifymindhub@gmail.com",    //DEFINIMOS LOS DATOS DE AUTORIZACION DE NUESTRO PROVEEDOR DE
-            pass: process.env.NODEMAILER                          //COREO ELECTRONICO, CONFIGURAR CUAENTAS PARA PERMIR EL USO DE APPS
-        }                                               //CONFIGURACIONES DE GMAIL
+          user: "useremailverifymindhub@gmail.com",    //DEFINIMOS LOS DATOS DE AUTORIZACION DE NUESTRO PROVEEDOR DE
+          type: "OAuth2",
+          user: "useremailverifymindhub@gmail.com", 
+          clientId: process.env.GOOGLE_CLIENTID,
+          clientSecret: process.env.GOOGLE_CLIENTSECRET,
+          refreshToken: process.env.GOOGLE_REFRESHTOKEN,
+          accessToken: accessToken                        //COREO ELECTRONICO, CONFIGURAR CUAENTAS PARA PERMIR EL USO DE APPS
+        },
+        tls: {
+            rejectUnauthorized: false
+          }                                            //CONFIGURACIONES DE GMAIL
     })
 
     // EN ESTA SECCION LOS PARAMETROS DEL MAIL 
