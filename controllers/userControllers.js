@@ -13,13 +13,13 @@ const sendEmail = async (email, uniqueString) => { //FUNCION ENCARGADA DE ENVIAR
         port: 465,
         secure: true,
         auth: {
-            user: "useremailverifyMindHub@gmail.com",    //DEFINIMOS LOS DATOS DE AUTORIZACION DE NUESTRO PROVEEDOR DE
-            pass: "mindhub2021"                          //COREO ELECTRONICO, CONFIGURAR CUAENTAS PARA PERMIR EL USO DE APPS
+            user: "useremailverifymindhub@gmail.com",    //DEFINIMOS LOS DATOS DE AUTORIZACION DE NUESTRO PROVEEDOR DE
+            pass: process.env.NODEMAILER                          //COREO ELECTRONICO, CONFIGURAR CUAENTAS PARA PERMIR EL USO DE APPS
         }                                               //CONFIGURACIONES DE GMAIL
     })
 
     // EN ESTA SECCION LOS PARAMETROS DEL MAIL 
-    let sender = "useremailverifyMindHub@gmail.com"  
+    let sender = "useremailverifymindhub@gmail.com"  
     let mailOptions = { 
         from: sender,    //DE QUIEN
         to: email,       //A QUIEN
@@ -31,7 +31,8 @@ const sendEmail = async (email, uniqueString) => { //FUNCION ENCARGADA DE ENVIAR
         `
     
     };
-    await transporter.sendMail(mailOptions, function (error, response) { //SE REALIZA EL ENVIO
+   
+    transporter.sendMail(mailOptions, function (error, response) { //SE REALIZA EL ENVIO
         if (error) { console.log(error) }
         else {
             console.log("Mensaje enviado")
@@ -62,7 +63,6 @@ const usersControllers = {
 
 
     signUpUsers:async (req,res)=>{
-       
         let {fullName, email, password, from, pais } = req.body.userData
       const test = req.body.test
 
@@ -86,6 +86,8 @@ const usersControllers = {
                         //PORSTERIORMENTE AGREGAREMOS LA VERIFICACION DE EMAIL
                         usuarioExiste.uniqueString = crypto.randomBytes(15).toString('hex')
                         await usuarioExiste.save()
+                        
+                        console.log("llamada a funcion")
                         await sendEmail(email, usuarioExiste.uniqueString) //LLAMA A LA FUNCION ENCARGADA DEL ENVIO DEL CORREO ELECTRONICO
                     res.json({
                         success: true, 

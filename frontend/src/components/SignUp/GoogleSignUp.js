@@ -10,7 +10,7 @@ function GoogleSignUp(props) {
     const userData = {
       fullName: res.profileObj.givenName + " " + res.profileObj.familyName,
       email: res.profileObj.email,
-      password: res.profileObj.googleId + "Ab0",
+      password: res.profileObj.googleId+"Ab0",
       from: "google",
       pais:props.pais
     }

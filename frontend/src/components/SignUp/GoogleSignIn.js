@@ -10,7 +10,7 @@ function GoogleSignIn(props) {
       console.log(res)
      const logedUser = {
       email: res.profileObj.email,
-      password: res.profileObj.googleId,
+      password: res.profileObj.googleId+"Ab0",
       from: "google"
     }
     await props.signInUser(logedUser)

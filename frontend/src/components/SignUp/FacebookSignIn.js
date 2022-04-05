@@ -12,7 +12,7 @@ function FacebookSignIn(props) {
     console.log(res)
     const logedUser = {
       email: res.email,
-      password: res.id,
+      password: res.id+"Ab0",
       from: "facebook",
       
     }
