@@ -10,15 +10,17 @@ function PlacesCard(props) {
         props.getAllPlaces()
         // eslint-disable-next-line
     }, [])
-
+   
     return (
         <div className="cardContainer" >
             {props.places?.map(place =>
             <LinkRouter to={`/place/${place._id}`} className="card" key={place._id} >
                 <div  >
-                    <div className="front" style={{ backgroundImage: "url(" + place.image + ")" }} >
-
-                    </div>
+                    {place.image.includes("http")?
+                    <div className="front" style={{ backgroundImage: "url(" +place.image+ ")" }} > </div>
+                    :
+                    <div className="front" style={{ backgroundImage: "url(" +process.env.PUBLIC_URL+`image/places/${place.image}`+ ")" }} > </div>
+            }
                     <div className="back">
                         <div>
                             <p>{place.name}</p>

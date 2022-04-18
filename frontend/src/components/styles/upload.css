@@ -1,0 +1,24 @@
+.uploadContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 90vh;
+}
+
+.uploadItems{
+    width: 100%;
+    height: 50px;
+    margin: 10px;
+}
+.uploadForm{
+    width: 70%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20%;
+}
+.uploadInputs{
+    height: 100%;
+}

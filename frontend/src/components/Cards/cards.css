@@ -59,8 +59,8 @@
   
   .front,
   .back {
-    border: 5px solid blueviolet;  
-    display: flex;
+    border: 5px solid blueviolet  !important;  
+    display: flex ;
     border-radius: 6px;
     background-position: center;
     background-size: cover;

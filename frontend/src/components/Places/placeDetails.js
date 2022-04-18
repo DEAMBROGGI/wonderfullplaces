@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import './styles/placeDetails.css'
+import '../styles/placeDetails.css'
 import { connect } from 'react-redux';
-import placesActions from '../redux/actions/placesActions'
-import commentsActions from '../redux/actions/commentsActions';
+import placesActions from '../../redux/actions/placesActions'
+import commentsActions from '../../redux/actions/commentsActions';
 import { useParams } from 'react-router-dom';
 
 const PlaceDetails = (props) => {
@@ -53,14 +53,18 @@ const PlaceDetails = (props) => {
   }
   console.log(place)
 
-
+const placeImage = place?.image.includes("http")?
+<div className='detailImg' style={{ backgroundImage: "url(" + place?.image + ")" }}></div>
+:
+<div className='detailImg' style={{ backgroundImage: "url("  + process.env.PUBLIC_URL+`../image/places/${place?.image}`   +  ")" }}></div>
+ 
 
   return (
     <>
 
       <div className="card mb-3 cardDetail"  >
         <p className="card-text textDetail">Creador {place?.autor.fullName}</p>
-        <div className='detailImg' style={{ backgroundImage: "url(" + place?.image + ")" }}></div>
+        {placeImage}
         <div className="card-body">
           <h5 className="card-title">{place?.name}</h5>
           <h2>{place?.country}</h2>

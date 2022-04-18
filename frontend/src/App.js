@@ -4,7 +4,7 @@ import './App.css';
 import Snackbar from './components/Snackbar';
 import SignUp from "./components/SignUp/signup";
 import SignIn from "./components/SignUp/signin";
-import PlaceDetails from "./components/placeDetails"
+import PlaceDetails from "./components/Places/placeDetails"
 import NavBar from './components/navBar';
 import { connect } from 'react-redux';
 import userActions from './redux/actions/userActions';
@@ -15,8 +15,8 @@ import io from "socket.io-client";
 import UserList from './components/User/userList';
 import UserAccount from './components/User/userAccount';
 
-//export const urlBackend = 'http://localhost:4000'
-export const urlBackend = 'https://wonderfullplaces.herokuapp.com'
+export const urlBackend = 'http://localhost:4000'
+//export const urlBackend = 'https://wonderfullplaces.herokuapp.com'
 
 function App(props) {
   useEffect(()=>{

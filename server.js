@@ -4,6 +4,7 @@ const passport = require("passport")
 const express = require('express')
 require('./config/database')
 const { Server } = require("socket.io")
+const fileUpload = require('express-fileupload')
 const {getUserConected} = require('./controllers/socketControllers')
 
 
@@ -18,6 +19,7 @@ const app = express()
 
 //middlewares
 app.use(cors())
+app.use(fileUpload())
 app.use(express.json())
 app.use(passport.initialize())
 app.use('/api', Router)
@@ -46,7 +48,6 @@ io.on('connect', (socket) => {  // CONEXION PRIMARIA ENTRE EL SERVER Y NUESTRO I
     await getUserConected()       //BUSCA EN LA DB LOS USUARIOS CONECTADOS
       .then(response => {
 
-        console.log(response)
         socket.emit('usersConected', { response }) //LO EMITE PARA TU SOCKET LO RECIBE EN "UsersConected"
         socket.broadcast.emit('usersConected', { response }) //LO EMITE PARA TODOS LOS SOCKETS "UsersConected"
       })

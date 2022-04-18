@@ -37,7 +37,29 @@ const placesActions = {
                 console.log(error)
             }
         }
-    }
+    },
+
+    uploadPlace: (newPlace) => {
+        const token = localStorage.getItem('token')
+        
+        return async (dispatch, getState) => {
+            const res = await axios.post(`${urlBackend}/api/places/upload`, newPlace,
+            {headers: {
+                Authorization: "Bearer "+token
+                }
+            })
+            console.log(res)
+            dispatch({
+                type: 'message',
+                payload: {
+                    view: true,
+                    message: res.data.message,
+                    success: res.data.success
+                }
+            })
+           return res
+        }
+    },
 }
 
 export default placesActions;

@@ -6,20 +6,22 @@ const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 const jwt = require('jsonwebtoken')
 
-const myOAuth2Client = new OAuth2(
-    process.env.GOOGLE_CLIENTID,
-    process.env.GOOGLE_CLIENTSECRET,
-    "https://developers.google.com/oauthplayground"
-    )
-    myOAuth2Client.setCredentials({
-        refresh_token:process.env.GOOGLE_REFRESHTOKEN
-        });
-
-        const accessToken = myOAuth2Client.getAccessToken()     
-
-
 
 const sendEmail = async (email, uniqueString) => { //FUNCION ENCARGADA DE ENVIAR EL EMAIL
+
+    const myOAuth2Client = new OAuth2(
+        process.env.GOOGLE_CLIENTID,
+        process.env.GOOGLE_CLIENTSECRET,
+        "https://developers.google.com/oauthplayground"
+        )
+        myOAuth2Client.setCredentials({
+            refresh_token:process.env.GOOGLE_REFRESHTOKEN
+            });
+    
+            const accessToken = myOAuth2Client.getAccessToken() 
+
+
+
 
     const transporter = nodemailer.createTransport({ //DEFINIMOS EL TRASPORTE UTILIZANDO NODEMAILER
         service: "gmail",
@@ -90,7 +92,7 @@ const usersControllers = {
             const usuarioExiste = await User.findOne({ email }) //BUSCAR SI EL USUARIO YA EXISTE EN DB
             
             if (usuarioExiste) {
-                console.log(usuarioExiste.from.indexOf(from))
+               // console.log(usuarioExiste.from.indexOf(from))
                 if (usuarioExiste.from.indexOf(from) !== -1) {
                     //console.log("resultado de if " +(usuarioExiste.from.indexOf(from) !==0 )) //INDEXOF = 0 EL VALOR EXISTE EN EL INDICE EQ A TRUE -1 NO EXITE EQ A FALSE
                     res.json({ success: false,
@@ -106,7 +108,6 @@ const usersControllers = {
                         usuarioExiste.uniqueString = crypto.randomBytes(15).toString('hex')
                         await usuarioExiste.save()
                         
-                        console.log("llamada a funcion")
                         await sendEmail(email, usuarioExiste.uniqueString) //LLAMA A LA FUNCION ENCARGADA DEL ENVIO DEL CORREO ELECTRONICO
                     res.json({
                         success: true, 
@@ -163,7 +164,7 @@ const usersControllers = {
                 } 
             }
         } catch (error) {
-            console.log(error)
+          
             res.json({ success: false, message: "Algo a salido mal intentalo en unos minutos" }) //CAPTURA EL ERROR
         }
     },
@@ -227,7 +228,6 @@ const usersControllers = {
                             fullName: usuarioExiste.fullName, 
                             email: usuarioExiste.email,
                             from:from,
-                            
 
                             }
                             usuarioExiste.isConected = true
@@ -256,7 +256,7 @@ const usersControllers = {
             }
 
         } catch (error) {
-            console.log(error);
+          
             res.json({ success: false, message: "Algo a salido mal intentalo en unos minutos" })
         }
     },

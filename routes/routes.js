@@ -6,7 +6,7 @@ const {signUpUsers, signInUser, signOutUser,verifyEmail, verificarToken}= usersC
 const passport = require('../config/passport')
 //PLACES REQUIRES
 const placesControlers = require('../controllers/placesControlers')
-const {getAllPlaces, getOnePlace, likeDislike}= placesControlers
+const {getAllPlaces, getOnePlace, likeDislike, uploadPlace}= placesControlers
 
 //COMMENTS REQUIRES
 const commentsControllers = require('../controllers/commentsControllers')
@@ -24,6 +24,8 @@ Router.route('/places/comment')
 Router.route('/places/comment/:id')
 .post(passport.authenticate('jwt',{ session: false }),deleteComment)
 
+Router.route('/places/upload')
+.post(passport.authenticate('jwt',{ session: false }),uploadPlace)
 //PLACES ROUTES
 Router.route('/places/getallplaces')
 .get(getAllPlaces)

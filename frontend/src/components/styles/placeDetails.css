@@ -7,7 +7,7 @@
 .detailImg{
     width: auto !important;
     height: 500px !important;
-    background-size: auto !important;
+    background-size: contain !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     border-radius: 20px;

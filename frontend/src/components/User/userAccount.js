@@ -4,6 +4,7 @@ import { Link as LinkRouter } from 'react-router-dom';
 import '../styles/navBar.css'
 import '../styles/userAccount.css'
 import UserList from './userList';
+import UploadPlaces from '../Places/UploadPlaces';
 
 const UserAccount = (props) => {
     const [selected, setSelected] = useState("userlist")
@@ -35,10 +36,17 @@ const UserAccount = (props) => {
                     onClick={() => setSelected("profile")}>
                     Profile
                 </button>
+                <button id="upload"
+                    name="typeUser"
+                    className="flex-sm-fill text-sm-center btnNav btnLink"
+                    onClick={() => setSelected("upload")}>
+                    Upload Place
+                </button>
 
             </nav>
             <div className='containerUserAccount'>
                 {selected === "userlist" && <UserList />}
+                {selected === 'upload' && <UploadPlaces/>}
             </div>
         </>
     )
