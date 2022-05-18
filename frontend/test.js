@@ -20,10 +20,10 @@ function signinTest() { //creamos la para el realizar el test y su objetivo meto
         webDriver.manage().window().maximize() //establecemos condiciones de pantalla
 
         //Creamos los puntos de vericicacion y su nombre
-        it('Ingreso credenciales incorrectascorrectas - Debe encontrar texto El usuario y/o contraseña incorrectos?', async () => {
+        it('Ingreso credenciales incorrectas - Debe encontrar texto El usuario y/o contraseña incorrectos?', async () => {
 
             // Establecemos la url a realizar el text y los pasos de verificacion
-            await webDriver.get('http://localhost:3000/signin')
+            await webDriver.get('https://wonderfullplaces.herokuapp.com/signin')
             await webDriver.findElement(By.name('email')).sendKeys(credenciales[0].username) // busca por nombre el elemento email y le pasa las credenciales definidas
             await webDriver.findElement(By.name('password')).sendKeys(credenciales[1].password) // busca por nombre el elemento password y le pasa las credenciales definidas
             await webDriver.sleep(3000) // tiempo de espera
@@ -36,7 +36,7 @@ function signinTest() { //creamos la para el realizar el test y su objetivo meto
         //Define la segunda instancia de verificacion
         it('Ingreso credenciales correctas - Debe encontrar texto Hello Adrian', async () => {
 
-            await webDriver.get('http://localhost:3000/signin')
+            await webDriver.get('https://wonderfullplaces.herokuapp.com/signin')
             await webDriver.findElement(By.name('email')).sendKeys(credenciales[0].username)
             await webDriver.findElement(By.name('password')).sendKeys(credenciales[0].password)
             await webDriver.sleep(3000)
