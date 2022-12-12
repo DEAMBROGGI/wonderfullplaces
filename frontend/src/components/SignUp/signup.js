@@ -56,7 +56,7 @@ function SignUp(props) {
                             <span className="bg-light">OR</span>
                         </p>
                         <GoogleSignUp pais={selectPaises} />
-                        //<FacebookSignUp pais={selectPaises} />
+                        
                         <form onSubmit={handleSubmit}>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
