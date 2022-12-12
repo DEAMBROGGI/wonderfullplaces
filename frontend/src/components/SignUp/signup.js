@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import userActions from '../../redux/actions/userActions';
 import { Link as LinkRouter } from 'react-router-dom';
 import GoogleSignUp from './GoogleSignUp'
-import FacebookSignUp from './FacebookSignUp';
+//import FacebookSignUp from './FacebookSignUp';
 
 
 function SignUp(props) {
@@ -56,7 +56,7 @@ function SignUp(props) {
                             <span className="bg-light">OR</span>
                         </p>
                         <GoogleSignUp pais={selectPaises} />
-                        <FacebookSignUp pais={selectPaises} />
+                        //<FacebookSignUp pais={selectPaises} />
                         <form onSubmit={handleSubmit}>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
