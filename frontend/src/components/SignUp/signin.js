@@ -28,7 +28,7 @@ function SignIn(props) {
 				<span className="bg-light"> SignIn</span>
 			</p>
 			<GoogleSignIn />
-			//<FacebookSignIn />
+			
 			<p className="divider-text">
 				<span className="bg-light"> Or</span>
 			</p>
