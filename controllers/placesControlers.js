@@ -7,7 +7,8 @@ const placesControllers = {
 
         try {
             const places = await Places.find()
-            res.json({ success: false, response: { places } })
+            console.log(places)
+            res.json({ success: true, response: { places } })
 
         }
         catch (error) {
