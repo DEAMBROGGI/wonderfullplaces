@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import userActions from '../../redux/actions/userActions';
 import { Link as LinkRouter } from 'react-router-dom';
 import GoogleSignIn from './GoogleSignIn'
-import FacebookSignIn from './FacebookSignIn';
+//import FacebookSignIn from './FacebookSignIn';
 
 function SignIn(props) {
 
@@ -28,7 +28,7 @@ function SignIn(props) {
 				<span className="bg-light"> SignIn</span>
 			</p>
 			<GoogleSignIn />
-			<FacebookSignIn />
+			
 			<p className="divider-text">
 				<span className="bg-light"> Or</span>
 			</p>
