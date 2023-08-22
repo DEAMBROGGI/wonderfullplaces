@@ -16,7 +16,7 @@ import UserList from './components/User/userList';
 import UserAccount from './components/User/userAccount';
 
 //export const urlBackend = 'http://localhost:4000'
-export const urlBackend = 'https://wonderfullplaces.azurewebsites.net/'
+export const urlBackend = process.env.BACKEND_PATH
 
 function App(props) {
   useEffect(()=>{
